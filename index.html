@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+	<head>
+	</head>
+	<body>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+			function Arrival(callback) {
+				// AppID: 160D6AAA210C9D54156D56820
+				return $.ajax({
+					type: 'GET',
+					dataType: 'json',
+					//url: 'http://developer.trimet.org/ws/V1/arrivals?json=true&locIDs=6849,6850&appID=160D6AAA210C9D54156D56820',
+					url: 'http://developer.trimet.org/ws/V1/arrivals?json=true&appID=160D6AAA210C9D54156D56820',
+					success: function (data) {
+						console.log("1");
+						if (callback !== undefined) {
+							callback (data);
+						}
+					}
+				});
+			}
+
+			function Location(callback) {
+				return $.ajax({
+					type: 'GET',
+					dataType: 'json',
+					url: 'http://developer.trimet.org/ws/V1/stops?json=true&appID=160D6AAA210C9D54156D56820',
+					success: function (data) {
+						if (callback !== undefined) {
+							callback (data);
+						}
+					}
+				})
+			}
+		</script>
+	</body>
+</html>
