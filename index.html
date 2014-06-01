@@ -5,13 +5,13 @@
 	<body>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script>
-			function Arrival(callback) {
+			function Arrival(stopID, callback) {
 				// AppID: 160D6AAA210C9D54156D56820
 				return $.ajax({
 					type: 'GET',
 					dataType: 'json',
 					//url: 'http://developer.trimet.org/ws/V1/arrivals?json=true&locIDs=6849,6850&appID=160D6AAA210C9D54156D56820',
-					url: 'http://developer.trimet.org/ws/V1/arrivals?json=true&appID=160D6AAA210C9D54156D56820',
+					url: 'http://developer.trimet.org/ws/V1/arrivals?json=true&appID=160D6AAA210C9D54156D56820&locIDs='+stopID,
 					success: function (data) {
 						console.log("1");
 						if (callback !== undefined) {
@@ -21,18 +21,38 @@
 				});
 			}
 
-			function Location(callback) {
+			function Location(long, lat, callback) {
 				return $.ajax({
 					type: 'GET',
 					dataType: 'json',
-					url: 'http://developer.trimet.org/ws/V1/stops?json=true&appID=160D6AAA210C9D54156D56820',
+					url: 'http://developer.trimet.org/ws/V1/stops?json=true&appID=160D6AAA210C9D54156D56820&ll='+long+','+lat,
 					success: function (data) {
 						if (callback !== undefined) {
 							callback (data);
 						}
 					}
-				})
+				});
 			}
+			function Route(routeIDs, callback) {
+				return $.ajax({
+					type: 'GET',
+					dataType: 'json',
+					url: 'http://developer.trimet.org/ws/V1/routeConfig?json=true&appID=160D6AAA210C9D54156D56820&routes='+routeIDs,
+					success: function (data) {
+						if (callback !== undefined) {
+							callback (data);
+						}
+					}
+				});
+			}
+
+			function outputRoutes(data) {
+				data.resultSet.route.forEach (function (route) {
+					console.log(route);
+				});
+			}
+
+			//Route('', function (data) { outputRoutes(data) }) for list of all routes
 		</script>
 	</body>
 </html>
