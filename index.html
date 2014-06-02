@@ -22,37 +22,40 @@
 		<![endif]-->
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
-	<body ng-controller="RouteController as buses" ng-init="tab = 'all'">
-		<div class="container">
+	<body>
+		<div class="container" ng-controller="RouteController as buses">
 			<h1>Bus Routes</h1>
 			<button type="button" ng-click="displayRoutes()">Debug</button>
-			<ul class="nav nav-default nav-pills">
-				<li ng-class="{ active:tab === 'all'}"><a href ng-click="tab = 'all'">All</a></li>
-				<li ng-class="{ active:tab === 'rails'}"><a href ng-click="tab = 'rails'">Trains</a></li>
-				<li ng-class="{ active:tab === 'bus'}"><a href ng-click="tab = 'bus'">Buses</a></li>
-				<li ng-class="{ active:tab === 'shuttle'}"><a href ng-click="tab = 'shuttle'">Shuttles</a></li>
-			</ul>
-			<div class="panel panel-default" ng-show="tab === 'all'">
-				<ul id="all">
-					<li ng-repeat="route in routes">{{ route.desc }}</li>
+			<section ng-controller="RouteTypeController as routetype">
+				<ul class="nav nav-default nav-tabs">
+					<li ng-class="{ active: routetype.isSelected('all') }"><a href ng-click="routetype.selectTab('all')">All</a></li>
+					<li ng-class="{ active: routetype.isSelected('rails') }"><a href ng-click="routetype.selectTab('rails')">Trains</a></li>
+					<li ng-class="{ active: routetype.isSelected('bus') }"><a href ng-click="routetype.selectTab('bus')">Buses</a></li>
+					<li ng-class="{ active: routetype.isSelected('shuttle') }"><a href ng-click="routetype.selectTab('shuttle')">Shuttles</a></li>
+					<input type="text" ng-model="searchText">
 				</ul>
+				<div class="panel panel-default" ng-show="routetype.isSelected('all')">
+					<ul id="all">
+						<li ng-repeat="route in routes"><a href id="{{ route.route }}">{{ route.desc }}</a></li>
+					</ul>
+				</div>
+				<div class="panel panel-default" ng-show="routetype.isSelected('rails')">
+					<ul id="rails">
+						<li ng-repeat="route in routes | rails"><a href id="{{ route.route }}">{{ route.desc }}</a></li>
+					</ul>
+				</div>
+				<div class="panel panel-default" ng-show="routetype.isSelected('bus')">
+					<ul id="bus">
+						<li ng-repeat="route in routes | bus"><a href id="{{ route.route }}">{{ route.desc }}</a></li>
+					</ul>
+				</div>
+				<div class="panel panel-default" ng-show="routetype.isSelected('shuttle')">
+					<ul id="shuttle">
+						<li ng-repeat="route in routes | shuttle"><a href id="{{ route.route }}">{{ route.desc }}</a></li>
+					</ul>
+				</div>
 			</div>
-			<div class="panel panel-default" ng-show="tab === 'rails'">
-				<ul id="rails">
-					<li ng-repeat="route in routes | rails">{{ route.desc }}</li>
-				</ul>
-			</div>
-			<div class="panel panel-default" ng-show="tab === 'bus'">
-				<ul id="bus">
-					<li ng-repeat="route in routes | bus">{{ route.desc }}</li>
-				</ul>
-			</div>
-			<div class="panel panel-default" ng-show="tab === 'shuttle'">
-				<ul id="shuttle">
-					<li ng-repeat="route in routes | shuttle">{{ route.desc }}</li>
-				</ul>
-			</div>
-		</div>
+		</section>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		

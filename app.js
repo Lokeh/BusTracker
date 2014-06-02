@@ -183,11 +183,20 @@
 		init();
 	});
 
-	/*Route('', function (data) {
-		app.controller('RouteController', function (data) {
-			this.routes = data.resultSet.route; // an array starting at 0 for each stop;
-		});
-	});*/
+	app.controller('RouteTypeController', function () {
+		this.tab = 'rails';
+		this.selectTab = function (setTab) {
+			this.tab = setTab
+		};
+		this.isSelected = function (isSet) {
+			return this.tab === isSet;
+		};
+	});
+
+	app.controller('StopController', function ($scope) {
+		
+
+	});
 
 
 //}) // End Closure
