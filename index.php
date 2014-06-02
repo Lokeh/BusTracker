@@ -36,22 +36,22 @@
 				</ul>
 				<div class="panel panel-default" ng-show="routetype.isSelected('all')">
 					<ul id="all">
-						<li ng-repeat="route in routes | filter:searchText"><a href id="{{ route.route }}">{{ route.desc }}</a></li>
+						<li ng-repeat="route in routes | filter:searchText"><a href id="{{ route.route }}"><i class="fa fa-chevron-right"></i> {{ route.desc }}</a></li>
 					</ul>
 				</div>
 				<div class="panel panel-default" ng-show="routetype.isSelected('rails')">
 					<ul id="rails">
-						<li ng-repeat="route in routes | rails | filter:searchText"><a href id="{{ route.route }}">{{ route.desc }}</a></li>
+						<li ng-repeat="route in routes | rails | filter:searchText"><a href id="{{ route.route }}"><i class="fa fa-chevron-right"></i> {{ route.desc }}</a></li>
 					</ul>
 				</div>
 				<div class="panel panel-default" ng-show="routetype.isSelected('bus')">
 					<ul id="bus">
-						<li ng-repeat="route in routes | bus | filter:searchText"><a href id="{{ route.route }}">{{ route.desc }}</a></li>
+						<li ng-repeat="route in routes | bus | filter:searchText"><a href id="{{ route.route }}"><i class="fa fa-chevron-right"></i> {{ route.desc }}</a></li>
 					</ul>
 				</div>
 				<div class="panel panel-default" ng-show="routetype.isSelected('shuttle')">
-					<ul id="shuttle">
-						<li ng-repeat="route in routes | shuttle | filter:searchText"><a href id="{{ route.route }}">{{ route.desc }}</a></li>
+					<ul id="shuttle"><i class="fa fa-chevron-right"></i> 
+						<li ng-repeat="route in routes | shuttle | filter:searchText"><a href id="{{ route.route }}"><i class="fa fa-chevron-right"></i> {{ route.desc }}</a></li>
 					</ul>
 				</div>
 			</div>
