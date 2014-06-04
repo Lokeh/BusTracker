@@ -1,6 +1,6 @@
 <!-- routes-partial.html -->
-
-					<input type="text" class="filter" placeholder="Filter Routes">
+				<div ng-controller="RouteController as routeCtrl">
+					<input type="text" class="filter" placeholder="Filter Routes" ng-model="searchText">
 					<dl class="sub-nav">
 					  <dd class="active"><a href>All</a></dd>
 					  <dd><a href>Trains</a></dd>
@@ -9,10 +9,8 @@
 					</dl>
 					
 					<table>
-						<tr>
-							<td>1-Route</td>
-						</tr>
-						<tr>
-							<td>2-Route Name Here</td>
+						<tr ng-repeat="route in routes | filter:searchText">
+							<td>{{ routeCtrl.route }}</td>
 						</tr>
 					</table>
+				</div>
