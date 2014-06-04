@@ -150,7 +150,17 @@
 		};
 	});
 
-	app.controller('RouteController', function ($scope) {
+	app.config(function($stateProvider, $urlRouterProvider) {
+		$urlRouterProvider.otherwise("/routes");
+
+		$stateProvider
+			.state('routes', {
+				url: "/routes",
+				templateUrl: "routes-partial.html"
+			});
+	});
+
+	/*app.controller('RouteController', function ($scope) {
 		$scope.routes = [];
 
 		$scope.safeApply = function(fn) {
@@ -196,7 +206,7 @@
 	app.controller('StopController', function ($scope) {
 		
 
-	});
+	});*/
 
 
 //}) // End Closure

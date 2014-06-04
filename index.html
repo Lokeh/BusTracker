@@ -16,7 +16,7 @@
 		<!-- Other -->
 		<script src="js/vendor/modernizr.js"></script>
 	</head>
-	<body>
+	<body ng-app="busTrackerApp">
 		<nav class="top-bar" data-topbar>
 			<ul class="title-area">
 				<li class="name">
@@ -45,23 +45,8 @@
 		</ul>
 		<section role="main">
 			<div class="row">
-				<div class="columns">
-					<input type="text" class="filter" placeholder="Filter Routes">
-					<dl class="sub-nav">
-					  <dd class="active"><a href>All</a></dd>
-					  <dd><a href>Trains</a></dd>
-					  <dd><a href>Buses</a></dd>
-					  <dd><a href>Shuttles</a></dd>
-					</dl>
-					
-					<table>
-						<tr>
-							<td>1-Route</td>
-						</tr>
-						<tr>
-							<td>2-Route Name Here</td>
-						</tr>
-					</table>
+				<div class="columns" ui-view>
+
 				</div>
 			</div>
 		</section>
