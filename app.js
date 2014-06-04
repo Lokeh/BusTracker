@@ -150,19 +150,26 @@
 		};
 	});
 
+	/* Views */
 	app.config(function($stateProvider, $urlRouterProvider) {
 		$urlRouterProvider.otherwise("/routes");
 
 		$stateProvider
 			.state('routes', {
 				url: "/routes",
-				templateUrl: "routes-partial.html"
+				templateUrl: "routes-partial.html",
+				controller: "RouteController as routeCtrl"
+			})
+			.state('stops', {
+				url: "/stops/{routeID}",
+				templateUrl: "stops-partial.html",
+				controller: "StopController as stopCtrl"
 			});
 	});
 
 	app.controller('RouteController', function ($scope) {
 		$scope.routes = [];
-
+		$scope.tab = 'all';
 		$scope.safeApply = function(fn) {
 		    var phase = this.$root.$$phase;
 		    if(phase == '$apply' || phase == '$digest') {
@@ -179,12 +186,20 @@
 				$scope.safeApply(function () {
 					$scope.routes = data.resultSet.route;
 				});
-			})
+			});
 		};
 
 		$scope.displayRoutes = function displayRoutes() {
 			console.log($scope.routes);
 		};
+
+		$scope.setTabActive = function (name) {
+			$scope.tab = name;
+		}
+
+		$scope.isTabActive = function (check) {
+			return $scope.tab === check;
+		}
 
 		var init = function () {
 			$scope.getRoutes();
@@ -193,19 +208,41 @@
 		init();
 	});
 
-	app.controller('RouteTypeController', function () {
-		this.tab = 'rails';
-		this.selectTab = function (setTab) {
-			this.tab = setTab
-		};
-		this.isSelected = function (isSet) {
-			return this.tab === isSet;
-		};
-	});
+	app.controller('StopController', function ($scope, $stateParams) {
+		$scope.routeID = $stateParams.routeID;
+		$scope.stops = [];
 
-	app.controller('StopController', function ($scope) {
-		
+		$scope.safeApply = function(fn) {
+		    var phase = this.$root.$$phase;
+		    if(phase == '$apply' || phase == '$digest') {
+		        if(fn && (typeof(fn) === 'function')) {
+		          fn();
+		        }
+		    } else {
+		       this.$apply(fn);
+		    }
+		};
 
+
+		$scope.theRoute = function () {
+			return $scope.routeID;
+		};
+
+		$scope.getStops = function () {
+			Stops($scope.theRoute(), function (data) {
+				$scope.safeApply(function () {
+					$scope.stops = data.resultSet.route[0];
+				});
+			});
+		}
+
+		var init = function () {
+			if ($scope.routeID !== undefined) {
+				$scope.getStops();
+			}
+		}
+
+		init();
 	});
 
 

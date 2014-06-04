@@ -1,16 +1,29 @@
 <!-- routes-partial.html -->
-				<div ng-controller="RouteController as routeCtrl">
-					<input type="text" class="filter" placeholder="Filter Routes" ng-model="searchText">
-					<dl class="sub-nav">
-					  <dd class="active"><a href>All</a></dd>
-					  <dd><a href>Trains</a></dd>
-					  <dd><a href>Buses</a></dd>
-					  <dd><a href>Shuttles</a></dd>
-					</dl>
-					
-					<table>
-						<tr ng-repeat="route in routes | filter:searchText">
-							<td>{{ routeCtrl.route }}</td>
-						</tr>
-					</table>
-				</div>
+<input type="text" class="filter" placeholder="Filter Routes" ng-model="searchText">
+<dl class="sub-nav">
+  <dd ng-class="{ active: isTabActive('all') }"><a ng-click="setTabActive('all')">All</a></dd>
+  <dd ng-class="{ active: isTabActive('trains') }"><a ng-click="setTabActive('trains')">Trains</a></dd>
+  <dd ng-class="{ active: isTabActive('buses') }"><a ng-click="setTabActive('buses')" href>Buses</a></dd>
+  <dd ng-class="{ active: isTabActive('shuttles') }"><a ng-click="setTabActive('shuttles')" href>Shuttles</a></dd>
+</dl>
+<table>
+	<tbody ng-show="isTabActive('all')">
+		<tr ng-repeat="route in routes | filter:searchText">
+			<td><a ui-sref="stops( { routeID: '{{ route.route }}' } )"> {{ route.desc }}</a></td>
+		</tr>
+	</tbody>
+	<tbody ng-show="isTabActive('trains')">
+		<tr ng-repeat="route in routes | rails | filter:searchText">
+			<td><a ui-sref="stops( { routeID: '{{ route.route }}' } )">{{ route.desc }}</a></td>
+		</tr>
+	</tbody>
+	<tbody ng-show="isTabActive('buses')">
+		<tr ng-repeat="route in routes | bus | filter:searchText">
+			<td><a ui-sref="stops( { routeID: '{{ route.route }}' } )">{{ route.desc }}</a></td>
+		</tr>
+	</tbody>
+	<tbody ng-show="isTabActive('shuttles')">
+		<tr ng-repeat="route in routes | shuttle | filter:searchText">
+			<td><a ui-sref="stops( { routeID: '{{ route.route }}' } )">{{ route.desc }}</a></td>
+		</tr>
+</table>

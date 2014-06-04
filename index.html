@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Foundation | Welcome</title>
+		<title>Welcome</title>
 		<link rel="stylesheet" href="css/foundation.css" />
 		<link rel="stylesheet" href="style.css" />
 
@@ -20,18 +20,18 @@
 		<nav class="top-bar" data-topbar>
 			<ul class="title-area">
 				<li class="name">
-					<h1><a href="#">AppName</a></h1>
+					<h1><a href>AppName</a></h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+				<li class="toggle-topbar menu-icon"><a href><span>Menu</span></a></li>
 			</ul>
 
 			<section class="top-bar-section">
 				<!-- Nav Section -->
 				<ul class="left">
-					<li class="active"><a href>Routes</a></li>
-					<li><a href>Stops</a></li>
-					<li><a href>Nearby</a></li>
+					<li ui-sref-active="active"><a ui-sref="routes">Routes</a></li>
+					<li ui-sref-active="active"><a ui-sref="stops">Stops</a></li>
+					<li ui-sref-active="active"><a href>Nearby</a></li>
 				</ul>
 				
 				<!-- Right Nav Section -->
