@@ -9,6 +9,6 @@
 		</th>
 	</tr>
 	<tr ng-repeat="stop in direction.stop | filter:searchText">
-		<td>{{ stop.desc }}<span class="id">(ID: {{ stop.locid }})</span></td>
+		<td><a ui-sref="arrivals({ stopID: {{ stop.locid }} })">{{ stop.desc }}<span class="id">(ID: {{ stop.locid }})</span></a></td>
 	</tr>
 </table>

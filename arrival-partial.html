@@ -1,0 +1,8 @@
+<!-- arrival-partial.html -->
+<input type="text" class="filter" placeholder="Filter Stops" ng-model="searchText" /> 
+<span style="float: left">{{ theStop() }}</span>
+<table>
+	<tr ng-repeat="time in arrivals | filter:searchText">
+		<td>{{ time.shortSign }}<span class="id">{{ time.estimated | date:'h:mma' }}</span></td>
+	</tr>
+</table>

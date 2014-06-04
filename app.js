@@ -164,6 +164,11 @@
 				url: "/stops/{routeID}",
 				templateUrl: "stops-partial.html",
 				controller: "StopController as stopCtrl"
+			})
+			.state('arrivals', {
+				url: "/arrivals/{stopID}",
+				templateUrl: "arrival-partial.html",
+				controller: "ArrivalController as arrivalCtrl"
 			});
 	});
 
@@ -244,6 +249,40 @@
 
 		init();
 	});
+
+	app.controller('ArrivalController', function ($scope, $stateParams) {
+		$scope.stopID = $stateParams.stopID;
+		$scope.arrivals = [];
+
+		$scope.safeApply = function(fn) {
+		    var phase = this.$root.$$phase;
+		    if(phase == '$apply' || phase == '$digest') {
+		        if(fn && (typeof(fn) === 'function')) {
+		          fn();
+		        }
+		    } else {
+		       this.$apply(fn);
+		    }
+		};
+
+		$scope.theStop = function () {
+			return $scope.stopID;
+		};
+
+		$scope.getArrivals = function () {
+			Arrival($scope.stopID, function (data) {
+				$scope.safeApply(function () {
+					$scope.arrivals = data.resultSet.arrival;
+				})
+			})
+		}
+
+		var init = function () {
+			$scope.getArrivals();
+		}
+
+		init();
+	})
 
 
 //}) // End Closure
