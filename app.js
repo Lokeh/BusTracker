@@ -160,7 +160,7 @@
 			});
 	});
 
-	/*app.controller('RouteController', function ($scope) {
+	app.controller('RouteController', function ($scope) {
 		$scope.routes = [];
 
 		$scope.safeApply = function(fn) {
@@ -206,7 +206,7 @@
 	app.controller('StopController', function ($scope) {
 		
 
-	});*/
+	});
 
 
 //}) // End Closure
