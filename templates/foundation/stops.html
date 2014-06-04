@@ -1,19 +1,13 @@
 <!doctype html>
-<!-- Routes View -->
+<!-- Stops for Route View -->
 <html class="no-js" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Foundation | Welcome</title>
 		<link rel="stylesheet" href="css/foundation.css" />
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css" />
-
-		<!-- Angular -->
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
-		<script src="js/angular-ui-router.min.js"></script>
-		<script src="app.js"></script>
-
-		<!-- Other -->
 		<script src="js/vendor/modernizr.js"></script>
 	</head>
 	<body>
@@ -29,37 +23,39 @@
 			<section class="top-bar-section">
 				<!-- Nav Section -->
 				<ul class="left">
-					<li class="active"><a href>Routes</a></li>
-					<li><a href>Stops</a></li>
+					<li><a href>Routes</a></li>
+					<li class="active"><a href>Stops</a></li>
 					<li><a href>Nearby</a></li>
-				</ul>
-				
-				<!-- Right Nav Section -->
-				<ul class="right">
 					<li><a href>About</a></li>
 				</ul>
+				
+				<!-- Left Nav Section -->
 			</section>
 		</nav>
 		<ul class="breadcrumbs">
-			<li class="current"><a href>Routes</a></li>
+			<li><a href>Routes</a></li>
+			<li class="current">Route Name</li>
 		</ul>
 		<section role="main">
 			<div class="row">
 				<div class="columns">
-					<input type="text" class="filter" placeholder="Filter Routes">
-					<dl class="sub-nav">
-					  <dd class="active"><a href>All</a></dd>
-					  <dd><a href>Trains</a></dd>
-					  <dd><a href>Buses</a></dd>
-					  <dd><a href>Shuttles</a></dd>
-					</dl>
+					<input type="text" class="filter" id="stops" placeholder="Filter Stops" /> 
+					<a href class="button small" id="nearby"><i class="fa fa-map-marker"></i> Nearby</a>
 					
 					<table>
 						<tr>
-							<td>1-Route</td>
+							<td><a href="#" data-reveal-id="myModal">Stop 1 <span class="id">(ID: 3024)</span></a></td>
+							<div id="myModal" class="reveal-modal arrival-modal" data-reveal>
+								<h2>Next Arrivals for Stop 1</h2>
+								<ul>
+									<li><span class="arrival">10:23 AM</span> <span class="line">MAX Blue Line</span></li>
+									<li><span class="arrival">10:35 AM</span> <span class="line">MAX Red line</span></li>
+								</ul>
+								<a class="close-reveal-modal">&#215;</a>
+							</div>
 						</tr>
 						<tr>
-							<td>2-Route Name Here</td>
+							<td>Stop 2 <span class="id">(ID: 100)</span></td>
 						</tr>
 					</table>
 				</div>

@@ -1,0 +1,42 @@
+/* style.css */
+body {
+	margin: 0;
+}
+
+.navbar {
+	margin-bottom: 10px;
+}
+
+.panel-body{
+	padding: 0;
+}
+
+#all, #rails, #bus, #shuttle {
+	list-style: none;
+	padding-left: 0;
+	margin: 0 auto;
+}
+
+#all li, #rails li, #bus li, #shuttle li {
+	display: block;
+	margin: 2px auto;
+	padding: 10px 10px 10px 30px;
+	/*background: rgba(0,0,0,.05);*/
+	border-bottom: 1px solid #ddd;
+}
+
+#all li:last-child {
+	border-bottom: 0;
+}
+
+#all li i, #rails li i, #bus li i, #shuttle li i {
+	padding-right: 10px;
+}
+
+#all li a:hover, #rails li a:hover, #bus li a:hover, #shuttle li a:hover {
+	text-decoration: none;
+}
+
+#all li:hover, #rails li:hover, #bus li:hover, #shuttle li:hover {
+	background: rgba(0,100,255,.15);
+}

@@ -1,19 +1,13 @@
 <!doctype html>
-<!-- Routes View -->
+<!-- Stop Arrivals View -->
 <html class="no-js" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Foundation | Welcome</title>
 		<link rel="stylesheet" href="css/foundation.css" />
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css" />
-
-		<!-- Angular -->
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
-		<script src="js/angular-ui-router.min.js"></script>
-		<script src="app.js"></script>
-
-		<!-- Other -->
 		<script src="js/vendor/modernizr.js"></script>
 	</head>
 	<body>
@@ -29,39 +23,62 @@
 			<section class="top-bar-section">
 				<!-- Nav Section -->
 				<ul class="left">
-					<li class="active"><a href>Routes</a></li>
-					<li><a href>Stops</a></li>
+					<li><a href>Routes</a></li>
+					<li class="active"><a href>Stops</a></li>
 					<li><a href>Nearby</a></li>
-				</ul>
-				
-				<!-- Right Nav Section -->
-				<ul class="right">
 					<li><a href>About</a></li>
 				</ul>
+				
+				<!-- Left Nav Section -->
 			</section>
 		</nav>
 		<ul class="breadcrumbs">
-			<li class="current"><a href>Routes</a></li>
+			<li><a href>Stops</a></li>
+			<li class="current">Stop Name</li>
 		</ul>
 		<section role="main">
 			<div class="row">
 				<div class="columns">
-					<input type="text" class="filter" placeholder="Filter Routes">
-					<dl class="sub-nav">
-					  <dd class="active"><a href>All</a></dd>
-					  <dd><a href>Trains</a></dd>
-					  <dd><a href>Buses</a></dd>
-					  <dd><a href>Shuttles</a></dd>
-					</dl>
-					
 					<table>
 						<tr>
-							<td>1-Route</td>
+							<th>
+								Next Arrivals
+							</th>
 						</tr>
 						<tr>
-							<td>2-Route Name Here</td>
+							<td>
+								<span class="line">63-Washington Park/Arlington Hts</span>
+							</td>
+							<td class="arrival">
+								<span class="time">10:23 AM</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="line">54-Beaverton-Hillsdale Hwy</span> <span class="alert label radius detour">DETOUR ACTIVE</span>
+							</td>
+							<td class="arrival">
+								<span class="time">11:33 AM</span>
+							</td>
 						</tr>
 					</table>
+					<table id="dailyschedule">
+						<tr>
+							<th>
+								<i class="fa fa-caret-down"></i> Daily Schedule
+								<input type="text" class="filter" id="stops" placeholder="Filter Routes" />
+							</th>
+						</tr>
+						<tr>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							</td>
+						</tr>
+					</table>
+				
 				</div>
 			</div>
 		</section>

@@ -112,7 +112,7 @@
 
 	/********************* End Trimet Logic *********************/
 
-	var app = angular.module('busTrackerApp', []);
+	var app = angular.module('busTrackerApp', ['ui.router']);
 
 	app.filter('rails', function () {
 		return function (input) {
