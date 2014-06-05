@@ -253,6 +253,7 @@
 	app.controller('ArrivalController', function ($scope, $stateParams) {
 		$scope.stopID = $stateParams.stopID;
 		$scope.arrivals = [];
+		$scope.stopDesc = '';
 
 		$scope.safeApply = function(fn) {
 		    var phase = this.$root.$$phase;
@@ -273,13 +274,18 @@
 			Arrival($scope.stopID, function (data) {
 				$scope.safeApply(function () {
 					$scope.arrivals = data.resultSet.arrival;
-				})
-			})
-		}
+					$scope.stopDesc = data.resultSet.location[0].desc;
+				});
+			});
+		};
+
+		$scope.theTime = function (arrival) {
+			return (arrival.estimated === undefined ? arrival.scheduled : arrival.estimated);
+		};
 
 		var init = function () {
 			$scope.getArrivals();
-		}
+		};
 
 		init();
 	})
