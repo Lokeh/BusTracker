@@ -8,5 +8,7 @@ To Do
 	- Swiping to go back
 - 'Nearby' feature
 - Google maps integration
+- Trip planning
+- Desktop layout
 - Branding, UI polish
 - PhoneGap??? 
