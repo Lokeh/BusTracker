@@ -114,6 +114,7 @@
 
 	var app = angular.module('busTrackerApp', ['ui.router']);
 
+	/* Filters */
 	app.filter('rails', function () {
 		return function (input) {
 			var trains = [];
@@ -172,6 +173,7 @@
 			});
 	});
 
+	/* controllers */
 	app.controller('RouteController', function ($scope) {
 		$scope.routes = [];
 		$scope.tab = 'all';
@@ -253,7 +255,7 @@
 	app.controller('ArrivalController', function ($scope, $stateParams) {
 		$scope.stopID = $stateParams.stopID;
 		$scope.arrivals = [];
-		$scope.stopDesc = '';
+		$scope.stopInfo = {};
 
 		$scope.safeApply = function(fn) {
 		    var phase = this.$root.$$phase;
@@ -271,10 +273,13 @@
 		};
 
 		$scope.getArrivals = function () {
+			$('#refresh a i').addClass('fa-spin');
 			Arrival($scope.stopID, function (data) {
 				$scope.safeApply(function () {
 					$scope.arrivals = data.resultSet.arrival;
-					$scope.stopDesc = data.resultSet.location[0].desc;
+					$scope.stopInfo = data.resultSet.location[0];
+					window.setTimeout(function () {
+						$('#refresh a i').removeClass('fa-spin')}, 980);
 				});
 			});
 		};
@@ -288,7 +293,43 @@
 		};
 
 		init();
-	})
+	}).directive('googleMap', function () {
+		return {
+			restrict: 'E',
+			templateUrl: 'maps-partial.html',
+			link: function (scope, element, attrs) {
+				function attachInfo(map, marker, window, content) {
+					window.setContent(content);
+					window.open(map,marker);
+				};
+				
+				window.setTimeout(function () {
+					function moveMap() {
+						map.panBy(0,-40);
+					};
+					var myLatlng = new google.maps.LatLng(scope.stopInfo.lat,scope.stopInfo.lng);
+					var mapOptions = {
+						zoom: 15,
+						center: myLatlng
+					};
+					var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+					var marker = new google.maps.Marker({
+							position: myLatlng,
+							map: map,
+							title: 'Stop Name'
+						});
+					
+					var infoWindow = new google.maps.InfoWindow();
+					attachInfo(map, marker, infoWindow, '<div style="padding: 5px;">'+scope.stopInfo.desc+'</div>');
+					window.setTimeout(function () {
+						moveMap();
+					}, 300);
+				}, 1000);
+			}
+		};
+	});
+
+	/* Directives */
 
 
 //}) // End Closure

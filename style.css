@@ -12,6 +12,7 @@ h2 {
 li i {
 	padding-right: 10px;
 }
+
 .breadcrumbs {
 	margin-bottom: 0;
 	background: none;
@@ -67,16 +68,7 @@ span.id {
 	float: right;
 }
 
-.arrival-modal {
-	margin-top: 100px;
-	min-height: 20%;
-}
-
 .detour {
-}
-
-.arrival > .time {
-	font-weight: bold;
 }
 
 td.arrival {
@@ -92,4 +84,25 @@ table {
 #dailyschedule .filter#stops {
 	margin-left: 10px;
 	margin-bottom: 0;
+}
+
+#refresh {
+	display: inline-table;
+}
+
+#refresh a {
+	margin-bottom: 0;
+	margin-left: 60px;
+	float:right;
+}
+
+#stopdesc {
+	display: inline-table;
+	max-width: 80%;
+}
+
+#map-canvas {
+	width: 100%;
+	height: 150px;
+	margin-bottom: 10px;
 }

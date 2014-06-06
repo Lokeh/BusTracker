@@ -3,15 +3,15 @@
 <html class="no-js" lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<title>Welcome</title>
 		<link rel="stylesheet" href="css/foundation.css" />
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css" />
-
 		<!-- Angular -->
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 		<script src="js/angular-ui-router.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 		<script src="app.js"></script>
 
 		<!-- Other -->
@@ -41,10 +41,10 @@
 				</ul>
 			</section>
 		</nav>
-		<ul class="breadcrumbs">
-			<li class="current"><a href>Routes</a></li>
-		</ul>
 		<section role="main">
+			<ul class="breadcrumbs">
+				<li class="current"><a href>Routes</a></li>
+			</ul>
 			<div class="row">
 				<div class="columns" ui-view>
 

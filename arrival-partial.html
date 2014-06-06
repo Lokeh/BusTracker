@@ -1,8 +1,9 @@
 <!-- arrival-partial.html -->
-<input type="text" class="filter" placeholder="Filter Stops" ng-model="searchText" /> 
-<span style="float: left">{{ stopDesc }}</span>
+<google-map transclude></google-map>
+<div id="stopdesc"><span>{{ stopInfo.desc }}</span></div>
+<div id="refresh"><a href class="button tiny" ng-click="getArrivals()"><i class="fa fa-refresh"></i></a></div>
 <table>
-	<tr ng-repeat="time in arrivals | filter:searchText">
-		<td>{{ time.shortSign }}<span class="id">{{ theTime(time) | date:'h:mma' }}</span></td>
+	<tr ng-repeat="time in arrivals">
+		<td>{{ time.shortSign }}</td><td><span class="time">{{ theTime(time) | date:'h:mma' }}</span></td>
 	</tr>
 </table>
