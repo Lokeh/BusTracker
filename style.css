@@ -87,18 +87,18 @@ table {
 }
 
 #refresh {
-	display: inline-table;
+	width: 50%;
+	display: inline-block;
 }
 
 #refresh a {
 	margin-bottom: 0;
-	margin-left: 60px;
-	float:right;
+	float: right;
 }
 
 #stopdesc {
-	display: inline-table;
-	max-width: 80%;
+	width:50%;
+	display: inline-block;
 }
 
 #map-canvas {

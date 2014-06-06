@@ -3,12 +3,13 @@ To Do
 
 - List all stops
 - Breadcrumbs
-- Display time until, estimated time, and scheduled time
-- ng-touch implementation
-	- Swiping to go back
+- Detours, delays and weather notifications
+- Display time until
+- Whether estimated time or scheduled time
 - 'Nearby' feature
-- Google maps integration
-- Trip planning
+- (Done 6/5) Google maps integration
+- Route tracking
+- Arrival reminder
 - Desktop layout
 - Branding, UI polish
 - PhoneGap??? 
