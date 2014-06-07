@@ -1,68 +1,7 @@
-/* app.js */
+/* Controllers */
+
 'use strict';
 
-var app = angular.module('busTrackerApp', ['ui.router']);
-
-/* Filters */
-app.filter('rails', function () {
-	return function (input) {
-		var trains = [];
-		input.forEach(function (route) {
-			if (route.type === 'R') {
-				trains.push(route);
-			}
-		});
-		return trains;
-	};
-});
-
-app.filter('bus', function () {
-	return function (input) {
-		var bus = [];
-		input.forEach(function (route) {
-			if (route.type === 'B' && route.desc.indexOf('Shuttle') === -1) {
-				bus.push(route);
-			}
-		});
-		return bus;
-	};
-});
-
-app.filter('shuttle', function () {
-	return function (input) {
-		var shuttle = [];
-		input.forEach(function (route){
-			if (route.desc.indexOf('Shuttle') > -1) {
-				shuttle.push(route);
-			}
-		});
-		return shuttle;
-	};
-});
-
-/* Views */
-app.config(function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise("/routes");
-
-	$stateProvider
-		.state('routes', {
-			url: "/routes",
-			templateUrl: "partials/routes/routes.html",
-			controller: "RouteController as routeCtrl"
-		})
-		.state('stops', {
-			url: "/stops/{routeID}",
-			templateUrl: "partials/routes/stops.html",
-			controller: "StopController as stopCtrl"
-		})
-		.state('arrivals', {
-			url: "/arrivals/{stopID}",
-			templateUrl: "partials/routes/arrival.html",
-			controller: "ArrivalController as arrivalCtrl"
-		});
-});
-
-/* controllers */
 app.controller('RouteController', function ($scope) {
 	$scope.routes = [];
 	$scope.safeApply = function(fn) {

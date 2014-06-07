@@ -1,6 +1,6 @@
 To Do
 ==============
-
+- Refactor partials and app.js into files/folders
 - List all stops
 - Breadcrumbs
 - Detours, delays and weather notifications
