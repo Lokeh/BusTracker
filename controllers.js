@@ -116,12 +116,11 @@ app.controller('RouteController', function ($scope) {
 	$scope.timeUntil = function (arrival) {
 		$scope.getCurrentTime();
 		var arrivalTime = new Date($scope.theTime(arrival)),
-			untilDay = arrivalTime.getDay() - $scope.day,
-			untilMinutes = arrivalTime.get
-			untilHr = arrivalTime.getHours() - $scope.hour,
-			untilMin = arrivalTime.getMinutes() - $scope.min;
-		//console.log(arrivalTime);
-		return (untilDay > 0 ? untilDay + ' day' : '' + (untilHr > 0 ? untilHr + 'h ' + Math.abs(untilMin) + 'm' : '' + (untilMin > 0 ? untilMin + 'm' : '' ) ) );
+			minsUntilArrival = ( arrivalTime.getHours() * 60 + arrivalTime.getMinutes() ) - ( $scope.hour * 60 + $scope.min ), // mins since midnight - mins since midnight
+			hoursUntilArrival = Math.floor( minsUntilArrival/60 ),
+			timeUntilArrival = (arrivalTime.getDay() > 0 ? arrivalTime.getDay() + ' day' : '' + ((hoursUntilArrival > 0 ? hoursUntilArrival + 'h ' : '') + minsUntilArrival % 60 + 'm')); 
+		
+		return timeUntilArrival;
 	};
 
 	var init = function () {
