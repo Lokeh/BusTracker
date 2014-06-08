@@ -4,15 +4,23 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-		<title>Welcome</title>
+		<title>PDX InTransit</title>
 		<link rel="stylesheet" href="css/foundation.css" />
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css" />
-		<!-- Angular -->
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+		<!-- Libraries -->
+		<script src="js/vendor/jquery.js"></script>
+		<script src="js/foundation.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 		<script src="js/angular-ui-router.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+		<!-- App -->
+		<script src="trimet.js"></script>
 		<script src="app.js"></script>
+		<script src="controllers.js"></script>
+		<script src="directives.js"></script>
+		<script src="views.js"></script>
 
 		<!-- Other -->
 		<script src="js/vendor/modernizr.js"></script>
@@ -21,9 +29,8 @@
 		<nav class="top-bar" data-topbar>
 			<ul class="title-area">
 				<li class="name">
-					<h1><a href>AppName</a></h1>
+					<h1><a href>PDX InTransit</a></h1>
 				</li>
-				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 				<li class="toggle-topbar menu-icon"><a href><span>Menu</span></a></li>
 			</ul>
 
@@ -42,18 +49,10 @@
 			</section>
 		</nav>
 		<section role="main">
-			<ul class="breadcrumbs">
-				<li class="current"><a href>Routes</a></li>
-			</ul>
-			<div class="row">
-				<div class="columns" ui-view>
-
-				</div>
+			<div class="row" ui-view>
 			</div>
 		</section>
 	
-		<script src="js/vendor/jquery.js"></script>
-		<script src="js/foundation.min.js"></script>
 		<script>
 		  $(document).foundation();
 		</script>
