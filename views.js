@@ -17,7 +17,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			controller: "StopController as stopCtrl"
 		})
 		.state('arrivals', {
-			url: "/arrivals/{stopID}",
+			url: "/arrivals/{routeID},{stopID}",
 			templateUrl: "partials/routes/arrival.html",
 			controller: "ArrivalController as arrivalCtrl"
 		});

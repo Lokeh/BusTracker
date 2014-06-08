@@ -32,8 +32,12 @@ app.controller('RouteController', function ($scope) {
 	};
 
 	init();
+
+
+
 }).controller('StopController', function ($scope, $stateParams) {
-	$scope.routeID = $stateParams.routeID;
+	$scope.theRouteID = $stateParams.routeID;
+	console.log($scope.theRouteID)
 	$scope.stops = [];
 
 	$scope.safeApply = function(fn) {
@@ -49,7 +53,7 @@ app.controller('RouteController', function ($scope) {
 
 
 	$scope.theRoute = function () {
-		return $scope.routeID;
+		return $scope.theRouteID;
 	};
 
 	$scope.getStops = function () {
@@ -61,17 +65,22 @@ app.controller('RouteController', function ($scope) {
 	}
 
 	var init = function () {
-		if ($scope.routeID !== undefined) {
+		if ($scope.theRouteID !== undefined) {
 			$scope.getStops();
 		}
 	}
 
 	init();
-}).controller('ArrivalController', function ($scope, $interval, $stateParams) {
+
+
+
+}).controller('ArrivalController', function ($scope, $interval, $timeout, $stateParams) {
 	$scope.stopID = $stateParams.stopID;
+	$scope.theRouteID = $stateParams.routeID;
 	$scope.arrivals = []; // array to hold each arrival
 	$scope.stopInfo = {}; // Object to hold stop info
 	$scope.timeInterval; // variable to hold $interval object so we can cancel on destroy
+	$scope.day, $scope.hour, $scope.min;
 
 	$scope.safeApply = function(fn) {
 	    var phase = this.$root.$$phase;
@@ -95,9 +104,7 @@ app.controller('RouteController', function ($scope) {
 			$scope.safeApply(function () {
 				$scope.arrivals = data.resultSet.arrival;
 				$scope.stopInfo = data.resultSet.location[0];
-				console.log('hi');
-				window.setTimeout(function () {
-					$('#refresh a i').removeClass('fa-spin')}, 980);
+				$timeout(function () { $('#refresh a i').removeClass('fa-spin') }, 980);
 			});
 		});
 	};
@@ -119,12 +126,13 @@ app.controller('RouteController', function ($scope) {
 			minsUntilArrival = ( arrivalTime.getHours() * 60 + arrivalTime.getMinutes() ) - ( $scope.hour * 60 + $scope.min ), // mins since midnight - mins since midnight
 			hoursUntilArrival = Math.floor( minsUntilArrival/60 ),
 			timeUntilArrival = (arrivalTime.getDay() > 0 ? arrivalTime.getDay() + ' day' : '' + ((hoursUntilArrival > 0 ? hoursUntilArrival + 'h ' : '') + minsUntilArrival % 60 + 'm')); 
-		
+		console.log('ugh');
 		return timeUntilArrival;
 	};
 
 	var init = function () {
-		$scope.timeInterval = $interval($scope.getArrivals(), 60000);
+		$scope.getArrivals();
+		$scope.timeInterval = $interval($scope.getArrivals, 60000);
 	};
 
 	$scope.$on('$destroy', function () {

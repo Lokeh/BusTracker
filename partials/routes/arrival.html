@@ -1,6 +1,8 @@
 <!-- arrival-partial.html -->
 <ul class="breadcrumbs">
-	<li class="current"><a href>Routes</a></li>
+	<li><a ui-sref="routes">Routes</a></li>
+	<li><a ui-sref="stops({ routeID: theRouteID })">Stops</a></li>
+	<li class="current"><a ui-sref="arrivals">Arrivals</a></li>
 </ul>
 <div class="columns">
 	<google-map transclude></google-map>
