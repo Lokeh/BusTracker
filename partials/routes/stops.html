@@ -1,16 +1,22 @@
 <!-- stops-partial.html -->
-<div id="nearby">
-	<input type="text" class="filter" id="stops" placeholder="Filter Stops" ng-model="searchText.desc" /> 
-	<a href class="button small"><i class="fa fa-map-marker"></i> Nearby</a>
+<ul class="breadcrumbs">
+	<li><a ui-sref="routes">Routes</a></li>
+	<li class="current"><a href>Stops</a></li>
+</ul>
+<div class="columns">
+	<div id="nearby">
+		<input type="text" class="filter" id="stops" placeholder="Filter Stops" ng-model="searchText.desc" /> 
+		<a href class="button small"><i class="fa fa-map-marker"></i> Nearby</a>
+	</div>
+	<span>{{ stops.desc }}</span>
+	<table ng-repeat="direction in stops.dir">
+		<tr>
+			<th>
+				{{ direction.desc }}
+			</th>
+		</tr>
+		<tr ng-repeat="stop in direction.stop | filter:searchText">
+			<td><a ui-sref="arrivals({ stopID: {{ stop.locid }} })">{{ stop.desc }}<!--<span class="id">(ID: {{ stop.locid }})</span>--></a></td>
+		</tr>
+	</table>
 </div>
-<span>{{ stops.desc }}</span>
-<table ng-repeat="direction in stops.dir">
-	<tr>
-		<th>
-			{{ direction.desc }}
-		</th>
-	</tr>
-	<tr ng-repeat="stop in direction.stop | filter:searchText">
-		<td><a ui-sref="arrivals({ stopID: {{ stop.locid }} })">{{ stop.desc }}<!--<span class="id">(ID: {{ stop.locid }})</span>--></a></td>
-	</tr>
-</table>

@@ -1,15 +1,18 @@
 To Do
 ==============
-- Refactor partials and app.js into files/folders
+- (Done 6/6) Refactor partials and app.js into files/folders
 - List all stops
 - Breadcrumbs
 - Detours, delays and weather notifications
-- Display time until
-- Whether estimated time or scheduled time
+- (Done 6/8) Display time until
+- (Done) Whether estimated time or scheduled time
 - 'Nearby' feature
 - (Done 6/5) Google maps integration
-- Route tracking
-- Arrival reminder
 - Desktop layout
 - Branding, UI polish
-- PhoneGap??? 
+- PhoneGap???
+
+Wish List
+==============
+- Route tracking on map
+- Arrival reminder

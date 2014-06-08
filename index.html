@@ -9,13 +9,16 @@
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css" />
 		<!-- Angular -->
+		<script src="js/vendor/jquery.js"></script>
+		<script src="js/foundation.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 		<script src="js/angular-ui-router.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 		<script src="trimet.js"></script>
 		<script src="app.js"></script>
-		<script src="views.js"></script>
 		<script src="controllers.js"></script>
+		<script src="directives.js"></script>
+		<script src="views.js"></script>
 
 		<!-- Other -->
 		<script src="js/vendor/modernizr.js"></script>
@@ -26,7 +29,6 @@
 				<li class="name">
 					<h1><a href>AppName</a></h1>
 				</li>
-				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
 				<li class="toggle-topbar menu-icon"><a href><span>Menu</span></a></li>
 			</ul>
 
@@ -45,18 +47,10 @@
 			</section>
 		</nav>
 		<section role="main">
-			<ul class="breadcrumbs">
-				<li class="current"><a href>Routes</a></li>
-			</ul>
-			<div class="row">
-				<div class="columns" ui-view>
-
-				</div>
+			<div class="row" ui-view>
 			</div>
 		</section>
 	
-		<script src="js/vendor/jquery.js"></script>
-		<script src="js/foundation.min.js"></script>
 		<script>
 		  $(document).foundation();
 		</script>

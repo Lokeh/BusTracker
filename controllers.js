@@ -32,25 +32,7 @@ app.controller('RouteController', function ($scope) {
 	};
 
 	init();
-}).directive('filterTabs', function () {
-	return {
-		type: 'A',
-		templateUrl: 'partials/directives/filter-tabs.html',
-		link: function (scope, element, attrs) {
-			scope.tab = 'all';
-			scope.setTabActive = function (name) {
-				scope.tab = name;
-			}
-
-			scope.isTabActive = function (check) {
-				return scope.tab === check;
-			}
-		}
-
-	}
-});
-
-app.controller('StopController', function ($scope, $stateParams) {
+}).controller('StopController', function ($scope, $stateParams) {
 	$scope.routeID = $stateParams.routeID;
 	$scope.stops = [];
 
@@ -85,12 +67,11 @@ app.controller('StopController', function ($scope, $stateParams) {
 	}
 
 	init();
-});
-
-app.controller('ArrivalController', function ($scope, $stateParams) {
+}).controller('ArrivalController', function ($scope, $interval, $stateParams) {
 	$scope.stopID = $stateParams.stopID;
-	$scope.arrivals = [];
-	$scope.stopInfo = {};
+	$scope.arrivals = []; // array to hold each arrival
+	$scope.stopInfo = {}; // Object to hold stop info
+	$scope.timeInterval; // variable to hold $interval object so we can cancel on destroy
 
 	$scope.safeApply = function(fn) {
 	    var phase = this.$root.$$phase;
@@ -107,12 +88,14 @@ app.controller('ArrivalController', function ($scope, $stateParams) {
 		return $scope.stopID;
 	};
 
-	$scope.getArrivals = function () {
+	$scope.getArrivals = function () { // TODO: Refresh logic to directive - may change after Trimet service refactor
 		$('#refresh a i').addClass('fa-spin');
+		console.log('world');
 		Arrival($scope.stopID, function (data) {
 			$scope.safeApply(function () {
 				$scope.arrivals = data.resultSet.arrival;
 				$scope.stopInfo = data.resultSet.location[0];
+				console.log('hi');
 				window.setTimeout(function () {
 					$('#refresh a i').removeClass('fa-spin')}, 980);
 			});
@@ -123,47 +106,42 @@ app.controller('ArrivalController', function ($scope, $stateParams) {
 		return (arrival.estimated === undefined ? arrival.scheduled : arrival.estimated);
 	};
 
-	var init = function () {
-		$scope.getArrivals();
+	$scope.getCurrentTime = function () {
+		var now = new Date();
+		$scope.day = now.getDay();
+		$scope.hour = now.getHours();
+		$scope.min = now.getMinutes();
 	};
+
+	$scope.timeUntil = function (arrival) {
+		$scope.getCurrentTime();
+		var arrivalTime = new Date($scope.theTime(arrival)),
+			untilDay = arrivalTime.getDay() - $scope.day,
+			untilMinutes = arrivalTime.get
+			untilHr = arrivalTime.getHours() - $scope.hour,
+			untilMin = arrivalTime.getMinutes() - $scope.min;
+		//console.log(arrivalTime);
+		return (untilDay > 0 ? untilDay + ' day' : '' + (untilHr > 0 ? untilHr + 'h ' + Math.abs(untilMin) + 'm' : '' + (untilMin > 0 ? untilMin + 'm' : '' ) ) );
+	};
+
+	var init = function () {
+		$scope.timeInterval = $interval($scope.getArrivals(), 60000);
+	};
+
+	$scope.$on('$destroy', function () {
+		$interval.cancel($scope.timeInterval);
+	});
 
 	init();
-}).directive('googleMap', function () {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/directives/googlemaps.html',
-		link: function (scope, element, attrs) {
-			function attachInfo(map, marker, window, content) {
-				window.setContent(content);
-				window.open(map,marker);
-			};
+}); 
 
-			function Timer() {
 
-			}
-			
-			window.setTimeout(function () {
-				function moveMap() {
-					map.panBy(0,-40);
-				};
-				var myLatlng = new google.maps.LatLng(scope.stopInfo.lat,scope.stopInfo.lng);
-				var mapOptions = {
-					zoom: 15,
-					center: myLatlng
-				};
-				var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-				var marker = new google.maps.Marker({
-						position: myLatlng,
-						map: map,
-						title: 'Stop Name'
-					});
-				
-				var infoWindow = new google.maps.InfoWindow();
-				attachInfo(map, marker, infoWindow, '<div style="padding: 5px;">'+scope.stopInfo.desc+'</div>');
-				window.setTimeout(function () {
-					moveMap();
-				}, 300);
-			}, 1000);
-		}
-	};
-});
+
+/*
+	$scope.getCurrentTime(); // $scope.hour, $scope.min
+	var arrivalTime = new Date($scope.theTime(arrival))
+
+	var arrivalMinutesSinceMidnight = arrivalTime.getHours() * 60 + arrivalTime.getMinutes();
+	var currentMinutesSinceMidnight = $scope.hour * 60 + $scope.min;
+	var minsUntilArrival = arrivalMinutesSinceMidnight - currentMinutesSinceMidnight;
+	var timeUntilArrival = Math.floor( minsUntilArrival/60 ) + 'h' + minsUntilArrival % 60; */
