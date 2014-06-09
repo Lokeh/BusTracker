@@ -2,7 +2,7 @@
 
 'use strict';
 
-app.controller('RouteController', function ($scope) {
+app.controller('RouteController', function ($scope, transitRoutes) {
 	$scope.routes = [];
 	$scope.safeApply = function(fn) {
 	    var phase = this.$root.$$phase;
@@ -16,10 +16,8 @@ app.controller('RouteController', function ($scope) {
 	};
 
 	$scope.getRoutes = function getRoutes() {
-		Route('', function (data) {
-			$scope.safeApply(function () {
-				$scope.routes = data.resultSet.route;
-			});
+		transitRoutes.getRoutes().then(function (results) {
+			$scope.routes = results.data.resultSet.route;
 		});
 	};
 
@@ -35,9 +33,8 @@ app.controller('RouteController', function ($scope) {
 
 
 
-}).controller('StopController', function ($scope, $stateParams) {
+}).controller('StopController', function ($scope, $stateParams, transitStops) {
 	$scope.theRouteID = $stateParams.routeID;
-	console.log($scope.theRouteID)
 	$scope.stops = [];
 
 	$scope.safeApply = function(fn) {
@@ -57,10 +54,8 @@ app.controller('RouteController', function ($scope) {
 	};
 
 	$scope.getStops = function () {
-		Stops($scope.theRoute(), function (data) {
-			$scope.safeApply(function () {
-				$scope.stops = data.resultSet.route[0];
-			});
+		transitStops.getStops($scope.theRouteID).then(function (results) {
+			$scope.stops = results.data.resultSet.route[0];
 		});
 	}
 
@@ -74,7 +69,7 @@ app.controller('RouteController', function ($scope) {
 
 
 
-}).controller('ArrivalController', function ($scope, $interval, $timeout, $stateParams) {
+}).controller('ArrivalController', function ($scope, $interval, $timeout, $stateParams, transitArrivals) {
 	$scope.stopID = $stateParams.stopID;
 	$scope.theRouteID = $stateParams.routeID;
 	$scope.arrivals = []; // array to hold each arrival
@@ -99,14 +94,18 @@ app.controller('RouteController', function ($scope) {
 
 	$scope.getArrivals = function () { // TODO: Refresh logic to directive - may change after Trimet service refactor
 		$('#refresh a i').addClass('fa-spin');
-		console.log('world');
-		Arrival($scope.stopID, function (data) {
+		/*Arrival($scope.stopID, function (data) {
 			$scope.safeApply(function () {
 				$scope.arrivals = data.resultSet.arrival;
 				$scope.stopInfo = data.resultSet.location[0];
 				$timeout(function () { $('#refresh a i').removeClass('fa-spin') }, 980);
 			});
-		});
+		});*/
+		transitArrivals.getArrivals($scope.stopID).then(function (results) {
+			$scope.arrivals = results.data.resultSet.arrival;
+			$scope.stopInfo = results.data.resultSet.location[0];
+			$timeout(function () { $('#refresh a i').removeClass('fa-spin') }, 980);
+		})
 	};
 
 	$scope.theTime = function (arrival) {
@@ -125,8 +124,7 @@ app.controller('RouteController', function ($scope) {
 		var arrivalTime = new Date($scope.theTime(arrival)),
 			minsUntilArrival = ( arrivalTime.getHours() * 60 + arrivalTime.getMinutes() ) - ( $scope.hour * 60 + $scope.min ), // mins since midnight - mins since midnight
 			hoursUntilArrival = Math.floor( minsUntilArrival/60 ),
-			timeUntilArrival = (arrivalTime.getDay() > 0 ? arrivalTime.getDay() + ' day' : '' + ((hoursUntilArrival > 0 ? hoursUntilArrival + 'h ' : '') + minsUntilArrival % 60 + 'm')); 
-		console.log('ugh');
+			timeUntilArrival = (arrivalTime.getDay() > 0 ? arrivalTime.getDay() + ' day' : '' + ((hoursUntilArrival > 0 ? hoursUntilArrival + 'h ' : '') + minsUntilArrival % 60 + 'm'));
 		return timeUntilArrival;
 	};
 

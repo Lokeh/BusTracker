@@ -16,8 +16,8 @@
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
 		<!-- App -->
-		<script src="trimet.js"></script>
 		<script src="app.js"></script>
+		<script src="services.js"></script>
 		<script src="controllers.js"></script>
 		<script src="directives.js"></script>
 		<script src="views.js"></script>
