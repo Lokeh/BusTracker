@@ -122,9 +122,10 @@ app.controller('RouteController', function ($scope, transitRoutes) {
 	$scope.timeUntil = function (arrival) {
 		$scope.getCurrentTime();
 		var arrivalTime = new Date($scope.theTime(arrival)),
+			daysUntilArrival = ( arrivalTime.getDay() - $scope.day ),
 			minsUntilArrival = ( arrivalTime.getHours() * 60 + arrivalTime.getMinutes() ) - ( $scope.hour * 60 + $scope.min ), // mins since midnight - mins since midnight
 			hoursUntilArrival = Math.floor( minsUntilArrival/60 ),
-			timeUntilArrival = (arrivalTime.getDay() > 0 ? arrivalTime.getDay() + ' day' : '' + ((hoursUntilArrival > 0 ? hoursUntilArrival + 'h ' : '') + minsUntilArrival % 60 + 'm'));
+			timeUntilArrival = (daysUntilArrival > 0 ? daysUntilArrival + ' day' : '' + ((hoursUntilArrival > 0 ? hoursUntilArrival + 'h ' : '') + minsUntilArrival % 60 + 'm'));
 		return timeUntilArrival;
 	};
 
@@ -139,14 +140,3 @@ app.controller('RouteController', function ($scope, transitRoutes) {
 
 	init();
 }); 
-
-
-
-/*
-	$scope.getCurrentTime(); // $scope.hour, $scope.min
-	var arrivalTime = new Date($scope.theTime(arrival))
-
-	var arrivalMinutesSinceMidnight = arrivalTime.getHours() * 60 + arrivalTime.getMinutes();
-	var currentMinutesSinceMidnight = $scope.hour * 60 + $scope.min;
-	var minsUntilArrival = arrivalMinutesSinceMidnight - currentMinutesSinceMidnight;
-	var timeUntilArrival = Math.floor( minsUntilArrival/60 ) + 'h' + minsUntilArrival % 60; */

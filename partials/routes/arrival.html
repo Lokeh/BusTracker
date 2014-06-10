@@ -9,7 +9,8 @@
 	<div id="stopdesc"><span>{{ stopInfo.desc }}</span></div><div id="refresh"><a href class="button tiny" ng-click="getArrivals()"><i class="fa fa-refresh"></i></a></div>
 	<table>
 		<tr ng-repeat="time in arrivals">
-			<td>{{ time.shortSign }}</td><td><span class="time">{{ theTime(time) | date:'h:mma' }} <br /> ({{ timeUntil(time) }})</span></td>
+			<td class="notalink">{{ time.shortSign }}</td><td class="notalink"><span class="time">{{ theTime(time) | date:'h:mma' }}</span><br />
+			<span class="time">({{ timeUntil(time) }})</span></td>
 		</tr>
 	</table>
 </div>

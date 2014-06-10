@@ -1,7 +1,22 @@
 /* style.css */
 
+table tr td {
+	padding: 0;
+}
+
 table a {
 	display: block;
+	padding: 12px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.breadcrumbs * a {
+	padding: 5px;
+}
+
+.notalink {
+	padding: 7px;
 }
 
 h2 {
@@ -105,4 +120,8 @@ table {
 	width: 100%;
 	height: 150px;
 	margin-bottom: 10px;
+}
+
+.time {
+	float: right;
 }
