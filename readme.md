@@ -3,6 +3,8 @@ To Do
 - List all stops
 - Detours, delays and weather notifications
 - Handling latency, no stops returned, errors
+- Save favorite stops to front page (local storage)
+- Refactor factories into one 'transitFactory' that divides controller from model better
 - Bug reporting, analytics
 - Google maps infoWindow converted to factory
 - 'Nearby' feature
