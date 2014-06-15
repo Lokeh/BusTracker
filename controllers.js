@@ -2,7 +2,7 @@
 
 'use strict';
 
-app.controller('RouteController', function ($scope, transitRoutes) {
+app.controller('RouteController', function ($scope, transitInfo) {
 	$scope.routes = [];
 	$scope.safeApply = function(fn) {
 	    var phase = this.$root.$$phase;
@@ -16,13 +16,9 @@ app.controller('RouteController', function ($scope, transitRoutes) {
 	};
 
 	$scope.getRoutes = function getRoutes() {
-		transitRoutes.getRoutes().then(function (results) {
-			$scope.routes = results.data.resultSet.route;
+		transitInfo.getRoutes().then(function (results) {
+			$scope.routes = results;
 		});
-	};
-
-	$scope.displayRoutes = function displayRoutes() {
-		console.log($scope.routes);
 	};
 
 	var init = function () {
@@ -33,7 +29,7 @@ app.controller('RouteController', function ($scope, transitRoutes) {
 
 
 
-}).controller('StopController', function ($scope, $stateParams, transitStops) {
+}).controller('StopController', function ($scope, $stateParams, transitInfo) {
 	$scope.theRouteID = $stateParams.routeID;
 	$scope.stops = [];
 
@@ -54,8 +50,8 @@ app.controller('RouteController', function ($scope, transitRoutes) {
 	};
 
 	$scope.getStops = function () {
-		transitStops.getStops($scope.theRouteID).then(function (results) {
-			$scope.stops = results.data.resultSet.route[0];
+		transitInfo.getStops($scope.theRouteID).then(function (results) {
+			$scope.stops = results;
 		});
 	}
 
@@ -69,7 +65,7 @@ app.controller('RouteController', function ($scope, transitRoutes) {
 
 
 
-}).controller('ArrivalController', function ($scope, $interval, $timeout, $stateParams, transitArrivals) {
+}).controller('ArrivalController', function ($scope, $interval, $timeout, $stateParams, transitInfo) {
 	$scope.stopID = $stateParams.stopID;
 	$scope.theRouteID = $stateParams.routeID;
 	$scope.arrivals = []; // array to hold each arrival
@@ -94,16 +90,10 @@ app.controller('RouteController', function ($scope, transitRoutes) {
 
 	$scope.getArrivals = function () { // TODO: Refresh logic to directive - may change after Trimet service refactor
 		$('#refresh a i').addClass('fa-spin');
-		/*Arrival($scope.stopID, function (data) {
-			$scope.safeApply(function () {
-				$scope.arrivals = data.resultSet.arrival;
-				$scope.stopInfo = data.resultSet.location[0];
-				$timeout(function () { $('#refresh a i').removeClass('fa-spin') }, 980);
-			});
-		});*/
-		transitArrivals.getArrivals($scope.stopID).then(function (results) {
-			$scope.arrivals = results.data.resultSet.arrival;
-			$scope.stopInfo = results.data.resultSet.location[0];
+
+		transitInfo.getArrivals($scope.stopID).then(function (results) {
+			$scope.arrivals = results.arrivals;
+			$scope.stopInfo = results.location;
 			$timeout(function () { $('#refresh a i').removeClass('fa-spin') }, 980);
 		})
 	};

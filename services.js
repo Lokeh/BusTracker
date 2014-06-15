@@ -1,28 +1,26 @@
 /* Services */
-app.factory('transitRoutes', function ($http) {
+
+app.factory('transitInfo', function ($http) {
 	return {
 		getRoutes: function () {
 			return $http.get('http://developer.trimet.org/ws/V1/routeConfig?json=true&appID=160D6AAA210C9D54156D56820&routes=')
 				.then(function(data) {
-					return data;
+					return data.data.resultSet.route;
 				});
-		}
-	};
-}).factory('transitStops', function ($http) {
-	return {
+		},
 		getStops: function (routeID) {
 			return $http.get('http://developer.trimet.org/ws/V1/routeConfig?json=true&appID=160D6AAA210C9D54156D56820&dir=true&stops=true&routes='+routeID)
 				.then(function (data) {
-					return data;
+					return data.data.resultSet.route[0];
 				});
-		}
-	};
-}).factory('transitArrivals', function ($http) {
-	return {
+		},
 		getArrivals: function (stopID) {
 			return $http.get('http://developer.trimet.org/ws/V1/arrivals?json=true&appID=160D6AAA210C9D54156D56820&locIDs='+stopID)
 				.then(function (data) {
-					return data;
+					return {
+							'arrivals': data.data.resultSet.arrival,
+							'location': data.data.resultSet.location[0]
+						};
 				});
 		}
 	};

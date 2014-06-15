@@ -1,10 +1,11 @@
+URL: http://salty-gorge-5567.herokuapp.com/
+
 To Do
 ==============
 - List all stops
 - Detours, delays and weather notifications
 - Handling latency, no stops returned, errors
 - Save favorite stops to front page (local storage)
-- Refactor factories into one 'transitFactory' that divides controller from model better
 - Bug reporting, analytics
 - Google maps infoWindow converted to factory
 - 'Nearby' feature
@@ -20,6 +21,7 @@ Done
 - (Done 6/8) Convert Trimet.js to AngularJS services
 - (Done 6/8) Breadcrumbs
 - (Done 6/8) Display time until
+- (Done 6/13) Refactor factories into one 'transitFactory' that divides controller from model better
 
 Wish List
 ==============
