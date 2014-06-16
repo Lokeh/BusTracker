@@ -52,4 +52,31 @@ app.directive('filterTabs', function () {
 			}, 1000);
 		}
 	};
-});
+}).directive('detourAlert', function () {
+	return {
+		restrict: 'E',
+		template: '<span class="label alert round" ng-show="isDetour" style="margin-left: 10px;"><a data-reveal-id="myModal">Detour Active</a></span>',
+		scope: { arrival: '=' },
+		link: function (scope, element, attrs) {
+			scope.isDetour = scope.arrival.detour;
+							//true;
+		}
+	};
+}).directive('detourModal', ['transitInfo', function (transitInfo) {
+	return {
+		restrict: 'E',
+		template: '<div id="myModal" class="reveal-modal" data-reveal>'
+  					+'<h2>Awesome. I have it.</h2>'
+  					+'<p class="lead">Your couch.  It is mine.</p>'
+  					+'<p>Im a cool paragraph that lives inside of an even cooler modal. Wins</p>'
+			  		+'<a class="close-reveal-modal">&#215;</a>'
+					+'</div>',
+		scope: { num: '=' },
+		link: function (scope, element, attrs) {
+
+			transitInfo.getDetours(78).then(function (results) {
+				console.log(results);
+			});
+		}
+	}
+}]);

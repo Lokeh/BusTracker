@@ -22,6 +22,15 @@ app.factory('transitInfo', function ($http) {
 							'location': data.data.resultSet.location[0]
 						};
 				});
+		},
+		getDetours: function (routeID) {
+			return $http.get('http://developer.trimet.org/ws/V1/detours?json=true&appID=160D6AAA210C9D54156D56820&routes='+routeID)
+				.then(function (data) {
+					return {
+						'raw': data.data.resultSet.detour,
+						'desc': data.data.resultSet.detour[0].desc
+					};
+				});
 		}
 	};
 });

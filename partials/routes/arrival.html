@@ -7,10 +7,12 @@
 <div class="columns">
 	<google-map transclude></google-map>
 	<div id="stopdesc"><span>{{ stopInfo.desc }}</span></div><div id="refresh"><a href class="button tiny" ng-click="getArrivals()"><i class="fa fa-refresh"></i></a></div>
+	<detour-modal></detour-modal>
 	<table>
-		<tr ng-repeat="time in arrivals">
-			<td class="notalink">{{ time.shortSign }}</td><td class="notalink"><span class="time">{{ theTime(time) | date:'h:mma' }}</span><br />
-			<span class="time">({{ timeUntil(time) }})</span></td>
+		<tr ng-repeat="arrival in arrivals">
+			<td class="notalink">{{ arrival.shortSign }} <detour-alert arrival="arrival"></detour-alert></td><td class="notalink"><span class="time">{{ theTime(arrival) | date:'h:mma' }}</span><br />
+			<span class="time">({{ timeUntil(arrival) }})</span></td>
 		</tr>
 	</table>
+	<detour-modal></detour-modal>
 </div>
