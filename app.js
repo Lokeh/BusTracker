@@ -1,7 +1,7 @@
 /* app.js */
 'use strict';
 
-var app = angular.module('busTrackerApp', ['ui.router'])
+var app = angular.module('busTrackerApp', ['ui.router', 'fsCordova'])
 .config(function ($compileProvider){
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 });
