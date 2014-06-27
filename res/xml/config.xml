@@ -1,4 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<feature name="NetworkStatus">
-    <param name="android-package" value="org.apache.cordova.NetworkManager" />
-</feature>
