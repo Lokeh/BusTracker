@@ -1,17 +1,18 @@
 <!doctype html>
 <!-- index.html -->
-<html class="no-js" lang="en">
+<html class="no-js" lang="en"> <!--ng-app="busTrackerApp">-->
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<title>PDX InTransit</title>
+		<script src="http://debug.phonegap.com/target/target-script-min.js#intransit"></script>
 		<link rel="stylesheet" href="css/foundation.css" />
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css" />
 		<!-- Libraries -->
 		<script src="js/vendor/jquery.js"></script>
 		<script src="js/foundation.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+		<script src="/bower_components/angular/angular.min.js"></script>
 		<script src="js/angular-ui-router.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
@@ -24,6 +25,8 @@
 
 		<!-- Other -->
 		<script src="js/vendor/modernizr.js"></script>
+
+		<!-- Cordova bootstrap -->
 	</head>
 	<body ng-app="busTrackerApp">
 		<nav class="top-bar" data-topbar>
