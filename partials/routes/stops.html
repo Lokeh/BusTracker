@@ -5,7 +5,6 @@
 </ul>
 <div class="columns">
 	<div id="nearby">
-		<input type="text" class="filter" id="stops" placeholder="Filter Stops" ng-model="searchText.desc" /> 
 		<a href class="button small"><i class="fa fa-map-marker"></i> Nearby</a>
 	</div>
 	<span style="float: left">{{ stops.desc }}</span>
@@ -20,4 +19,7 @@
 			<td><a ui-sref="arrivals({ routeID: theRouteID, stopID: {{ stop.locid }} })">{{ stop.desc }}<!--<span class="id">(ID: {{ stop.locid }})</span>--></a></td>
 		</tr>
 	</table>
+</div>
+<div class="fixedFilter">
+	<input type="text" class="filter" id="stops" placeholder="Filter Stops" ng-model="searchText.desc" />
 </div>

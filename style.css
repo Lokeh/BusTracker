@@ -34,14 +34,18 @@ li i {
 	border: 0;
 }
 
-.filter{
-	margin: 4px 0;
+.fixedFilter {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	box-shadow: 0 0px 5px #888888;
 }
 
-.filter#stops {
-	width: 50%;
-	margin-right: 10px;
-	float: left;
+.filter#routes, .filter#stops{
+	margin: 10px auto;
+	width: 93%;
 }
 
 #nearby {
@@ -50,6 +54,7 @@ li i {
 #nearby a {
 	padding: 10px 40px;
 	margin-bottom: 17px;
+	display: block;
 }
 
 .sub-nav {
