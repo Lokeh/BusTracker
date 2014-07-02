@@ -1,9 +1,7 @@
-URL: http://salty-gorge-5567.herokuapp.com/
+URL: http://willacton.com/dev/intransit/
 
 To Do
 ==============
-<<<<<<< HEAD
-=======
 - PhoneGap testing on different platforms/browsers
 - 'Nearby' feature
 - Handling latency, no stops returned, errors
