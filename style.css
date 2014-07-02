@@ -154,3 +154,7 @@ table {
 .time {
 	float: right;
 }
+
+p {
+	margin-left: 10px;
+}
