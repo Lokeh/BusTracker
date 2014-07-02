@@ -2,7 +2,6 @@ URL: http://salty-gorge-5567.herokuapp.com/
 
 To Do
 ==============
-- List all stops
 - Handling latency, no stops returned, errors
 - Save favorite stops to front page (local storage)
 - Bug reporting, analytics
@@ -25,6 +24,7 @@ Done
 
 Wish List
 ==============
+- List all stops
 - Caching of schedule on backend if Trimet resource fails
 - Route tracking on map
 - Arrival reminder
