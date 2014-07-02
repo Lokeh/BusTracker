@@ -55,7 +55,7 @@ app.directive('filterTabs', function () {
 }).directive('detourAlert',  ['transitInfo', function (transitInfo) {
 	return {
 		restrict: 'E',
-		template: '<span class="label alert round detour" ng-show="isDetour">Detour</span>',
+		template: '<span class="label alert round detour" ng-show="isDetour">Alert</span>',
 		scope: { arrival: '='},
 		link: function (scope, element, attrs) {
 			scope.isDetour = scope.arrival.detour;
