@@ -129,4 +129,29 @@ app.controller('RouteController', function ($scope, transitInfo) {
 	});
 
 	init();
+
+
+}).controller('NearbyController', function ($scope, $stateParams, transitInfo) {
+	$scope.stops = [];
+	$scope.ll = [];
+	$scope.updateLocation = function () {
+		
+	}
+	$scope.getStops = function () {
+		transitInfo.getNearby('45.5176282','-122.693486').then(function (results) {
+			$scope.stops = results.stops;
+			//console.log($scope.stops);
+			
+			$scope.stops.forEach(function (el) {
+				$scope.ll.push([el.lat, el.lng])
+			});
+			//console.log($scope.ll);
+		});
+	};
+
+	var init = function () {
+		$scope.getStops();
+	}
+
+	init();
 }); 

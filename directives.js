@@ -97,4 +97,46 @@ app.directive('filterTabs', function () {
 			})
 		}
 	}
+})
+.directive('nearbyMap', function () {
+	return {
+		restrict: 'E',
+		template: '<div id="map-canvas"></div>',
+		link: function (scope, element, attrs) {
+			function moveMap() {
+				map.panBy(0,-40);
+			};
+
+			var myLatlng = new google.maps.LatLng('45.5176282','-122.693486');
+
+			var mapOptions = {
+				zoom: 16,
+				center: myLatlng
+			};
+
+			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+			/*var marker = new google.maps.Marker({
+						position: myLatlng,
+						map: map,
+						title: 'Stop Name'
+					});*/
+			var markers = [0];
+			scope.$watch('ll.length', function (newVal, oldVal) {
+				if (newVal !== oldVal) {
+					scope.ll.forEach(function (loc) {
+						var tempLoc = new google.maps.LatLng(loc[0],loc[1]);
+						markers.push(new google.maps.Marker({
+								position: tempLoc,
+								map: map,
+								title: 'Test'
+							}));
+					})
+					console.log(markers);
+				}
+			});
+
+			moveMap();
+
+		}
+	}
 });

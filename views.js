@@ -24,5 +24,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		.state('about', {
 			url: "/about",
 			templateUrl: "partials/routes/about.html"
+		})
+		.state('nearby', {
+			url: "/nearby",
+			controller: "NearbyController as nearbyCtrl",
+			template: "<nearby-map></nearby-map>"
 		});
 });
