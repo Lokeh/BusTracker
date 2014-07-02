@@ -20,5 +20,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			url: "/arrivals/{routeID}/{stopID}",
 			templateUrl: "partials/routes/arrival.html",
 			controller: "ArrivalController as arrivalCtrl"
+		})
+		.state('about', {
+			url: "/about",
+			templateUrl: "partials/routes/about.html"
 		});
 });
