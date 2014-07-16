@@ -134,23 +134,33 @@ app.controller('RouteController', function ($scope, transitInfo) {
 }).controller('NearbyController', function ($scope, $stateParams, transitInfo) {
 	$scope.stops = [];
 	$scope.ll = [];
-	$scope.updateLocation = function () {
-		
+	$scope.loc = { 'lat': 0, 'lng': 0 };
+	$scope.updateLocation = function (callback) {
+		//console.log('hi');
+		navigator.geolocation.getCurrentPosition(callback);
 	}
-	$scope.getStops = function () {
-		transitInfo.getNearby('45.5176282','-122.693486').then(function (results) {
+	$scope.getNearbyStops = function (lat, lng) {
+		//console.log(lat, lng);
+		transitInfo.getNearby(lat,lng).then(function (results) {
 			$scope.stops = results.stops;
 			//console.log($scope.stops);
-			
 			$scope.stops.forEach(function (el) {
-				$scope.ll.push([el.lat, el.lng])
+				$scope.ll.push({
+					'lat': el.lat,
+					'lng': el.lng,
+					'id': el.locid
+				});
 			});
 			//console.log($scope.ll);
 		});
 	};
 
 	var init = function () {
-		$scope.getStops();
+		$scope.updateLocation(function (loc) {
+			$scope.loc = { 'lat': loc.coords.latitude, 'lng': loc.coords.longitude };
+			$scope.drawMap();
+			$scope.getNearbyStops(loc.coords.latitude, loc.coords.longitude);
+		});
 	}
 
 	init();

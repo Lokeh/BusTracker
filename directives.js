@@ -101,41 +101,57 @@ app.directive('filterTabs', function () {
 .directive('nearbyMap', function () {
 	return {
 		restrict: 'E',
-		template: '<div id="map-canvas"></div>',
+		template: '<div id="map-canvas" height="100%"></div>',
 		link: function (scope, element, attrs) {
-			function moveMap() {
-				map.panBy(0,-40);
-			};
+			scope.markers = [];
+			var map = null;
+			var infowindows = [];
+			scope.drawMap = function () {
 
-			var myLatlng = new google.maps.LatLng('45.5176282','-122.693486');
+				function moveMap() {
+					//map.panBy(0,-40);
+				};
+				//console.log(scope.loc);
+				var myLatlng = new google.maps.LatLng(scope.loc.lat,scope.loc.lng);
 
-			var mapOptions = {
-				zoom: 16,
-				center: myLatlng
-			};
+				var mapOptions = {
+					zoom: 16,
+					center: myLatlng,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
 
-			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-			/*var marker = new google.maps.Marker({
-						position: myLatlng,
-						map: map,
-						title: 'Stop Name'
-					});*/
-			var markers = [0];
-			scope.$watch('ll.length', function (newVal, oldVal) {
-				if (newVal !== oldVal) {
-					scope.ll.forEach(function (loc) {
-						var tempLoc = new google.maps.LatLng(loc[0],loc[1]);
-						markers.push(new google.maps.Marker({
-								position: tempLoc,
-								map: map,
-								title: 'Test'
+				map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+				moveMap();
+
+				var curposMarker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title: "You",
+					icon: 'img/cur_position.png'
+				})
+				
+				scope.$watch('ll.length', function (newVal, oldVal) {
+					if (newVal !== oldVal) {
+						scope.markers = [];
+						scope.ll.forEach(function (loc, i) {
+							var tempLoc = new google.maps.LatLng(loc.lat,loc.lng);
+							console.log(loc);
+							scope.markers.push(new google.maps.Marker({
+									position: tempLoc,
+									map: map,
+									title: loc.id.toString(),
 							}));
-					})
-					console.log(markers);
-				}
-			});
-
-			moveMap();
+							infowindows.push(new google.maps.InfoWindow({
+								content: loc.id.toString()
+							}));
+							google.maps.event.addListener(scope.markers[i], 'click', function() {
+								infowindows[i].open(map, scope.markers[i]);
+							});
+						})
+						console.log(scope.markers);
+					}
+				});
+			}
 
 		}
 	}
