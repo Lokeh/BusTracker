@@ -144,7 +144,7 @@ app.directive('filterTabs', function () {
 							infowindows.push(new google.maps.InfoWindow({
 								content: '<div style="min-width: 100px; min-height: 30px;">'
 										 +loc.desc+'<br>'
-										 +'<a href="/#/arrivals//'+loc.id+'">Arrivals</a>'
+										 +'<a href="#/arrivals//'+loc.id+'">Arrivals</a>'
 										 +'</div>',
 								maxWidth: 200
 							}));
