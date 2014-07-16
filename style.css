@@ -147,6 +147,12 @@ table {
 
 #map-canvas {
 	width: 100%;
+	height: 150px;
+	margin-bottom: 10px;
+}
+
+#nearby-canvas {
+	width: 100%;
 	height: 425px;
 	margin-bottom: 10px;
 }
@@ -158,3 +164,5 @@ table {
 p {
 	margin-left: 10px;
 }
+
+#map-canvas img, #nearby-canvas img {max-width: none;}

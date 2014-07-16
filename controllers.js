@@ -143,12 +143,13 @@ app.controller('RouteController', function ($scope, transitInfo) {
 		//console.log(lat, lng);
 		transitInfo.getNearby(lat,lng).then(function (results) {
 			$scope.stops = results.stops;
-			//console.log($scope.stops);
+			console.log($scope.stops);
 			$scope.stops.forEach(function (el) {
 				$scope.ll.push({
 					'lat': el.lat,
 					'lng': el.lng,
-					'id': el.locid
+					'id': el.locid,
+					'desc': el.desc
 				});
 			});
 			//console.log($scope.ll);

@@ -101,7 +101,7 @@ app.directive('filterTabs', function () {
 .directive('nearbyMap', function () {
 	return {
 		restrict: 'E',
-		template: '<div id="map-canvas" height="100%"></div>',
+		template: '<div id="nearby-canvas" height="100%"></div>',
 		link: function (scope, element, attrs) {
 			scope.markers = [];
 			var map = null;
@@ -120,7 +120,7 @@ app.directive('filterTabs', function () {
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 
-				map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+				map = new google.maps.Map(document.getElementById('nearby-canvas'), mapOptions);
 				moveMap();
 
 				var curposMarker = new google.maps.Marker({
@@ -135,14 +135,18 @@ app.directive('filterTabs', function () {
 						scope.markers = [];
 						scope.ll.forEach(function (loc, i) {
 							var tempLoc = new google.maps.LatLng(loc.lat,loc.lng);
-							console.log(loc);
+							//console.log(loc);
 							scope.markers.push(new google.maps.Marker({
 									position: tempLoc,
 									map: map,
 									title: loc.id.toString(),
 							}));
 							infowindows.push(new google.maps.InfoWindow({
-								content: loc.id.toString()
+								content: '<div style="min-width: 100px; min-height: 30px;">'
+										 +loc.desc+'<br>'
+										 +'<a href="/#/arrivals//'+loc.id+'">Arrivals</a>'
+										 +'</div>',
+								maxWidth: 200
 							}));
 							google.maps.event.addListener(scope.markers[i], 'click', function() {
 								infowindows[i].open(map, scope.markers[i]);

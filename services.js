@@ -34,7 +34,7 @@ app.factory('transitInfo', function ($http) {
 				});
 		},
 		getNearby: function (lat, lng) {
-			return $http.get('http://developer.trimet.org/ws/V1/stops?json=true&appID='+id+'&meters=200&ll='+lat+','+lng)
+			return $http.get('http://developer.trimet.org/ws/V1/stops?json=true&appID='+id+'&meters=150&ll='+lat+','+lng)
 				.then(function (data) {
 					return {
 						'raw':data.data.resultSet,
