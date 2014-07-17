@@ -101,13 +101,13 @@ app.directive('filterTabs', function () {
 .directive('nearbyMap', function () {
 	return {
 		restrict: 'E',
-		template: '<div id="nearby-canvas" height="100%"></div>',
+        template: '<div id="nearby-canvas"><div style="margin-top: 100px; text-align: center;">Finding Position<br><i class="fa fa-spin fa-spinner"></i></div></div>',
 		link: function (scope, element, attrs) {
 			scope.markers = [];
 			var map = null;
 			var infowindows = [];
 			scope.drawMap = function () {
-
+				angular.element('#nearby-canvas').html('');
 				function moveMap() {
 					//map.panBy(0,-40);
 				};
@@ -142,9 +142,9 @@ app.directive('filterTabs', function () {
 									title: loc.id.toString(),
 							}));
 							infowindows.push(new google.maps.InfoWindow({
-								content: '<div style="min-width: 100px; min-height: 30px;">'
+                                content: '<div style="min-width: 100px; min-height: 30px; text-align: center;">'
 										 +loc.desc+'<br>'
-										 +'<a href="#/arrivals//'+loc.id+'">Arrivals</a>'
+                                +'<a href="#/arrivals//'+loc.id+'" class="button tiny" style="margin-top: 5px; margin-bottom: 0; padding: 6px 15px;">Arrivals</a>'
 										 +'</div>',
 								maxWidth: 200
 							}));

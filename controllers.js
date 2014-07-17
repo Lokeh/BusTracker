@@ -138,13 +138,18 @@ app.controller('RouteController', function ($scope, transitInfo) {
 	$scope.geoError = function (err) {
 		alert('Error!' + err.message);
 	}
+    var watch;
+    $scope.getLocation = function (callback) {
+        watch = navigator.geolocation.watchPosition(callback, $scope.geoError, { enableHighAccuracy: true, timeout : 3000, maximumAge: 0 });
+        //setTimeout(function() { navigator.geolocation.clearWatch(watch); $scope.drawMap(); }, 5000);
+    }
 	$scope.updateLocation = function (callback) {
 		//console.log('hi');
-		navigator.geolocation.getCurrentPosition(callback, $scope.geoError, { enableHighAccuracy: true, timeout : 5000, maximumAge: 0 });
+		navigator.geolocation.watchPosition(callback, $scope.geoError, { enableHighAccuracy: true, timeout : 5000, maximumAge: 0 });
 	}
 	$scope.getNearbyStops = function (lat, lng) {
 		//console.log(lat, lng);
-		transitInfo.getNearby(lat,lng).then(function (results) {
+		transitInfo.getNearby(lat,lng, 500).then(function (results) {
 			$scope.stops = results.stops;
 			console.log($scope.stops);
 			$scope.stops.forEach(function (el) {
@@ -160,11 +165,15 @@ app.controller('RouteController', function ($scope, transitInfo) {
 	};
 
 	var init = function () {
-		$scope.updateLocation(function (loc) {
-			alert(loc.coords.accuracy);
-			$scope.loc = { 'lat': loc.coords.latitude, 'lng': loc.coords.longitude };
-			$scope.drawMap();
-			$scope.getNearbyStops(loc.coords.latitude, loc.coords.longitude);
+		$scope.getLocation(function (loc) {
+			angular.element('nearby-map').append(loc.coords.accuracy+'<br/>');
+            if (loc.coords.accuracy <= 150) {
+                navigator.geolocation.clearWatch(watch);
+                $scope.loc = { 'lat': loc.coords.latitude, 'lng': loc.coords.longitude };
+                $scope.drawMap();
+				$scope.getNearbyStops(loc.coords.latitude, loc.coords.longitude);
+            }
+			
 		});
 	}
 
