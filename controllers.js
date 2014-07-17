@@ -161,6 +161,7 @@ app.controller('RouteController', function ($scope, transitInfo) {
 
 	var init = function () {
 		$scope.updateLocation(function (loc) {
+			alert(loc.coords.accuracy);
 			$scope.loc = { 'lat': loc.coords.latitude, 'lng': loc.coords.longitude };
 			$scope.drawMap();
 			$scope.getNearbyStops(loc.coords.latitude, loc.coords.longitude);
