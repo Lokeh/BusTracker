@@ -136,11 +136,11 @@ app.controller('RouteController', function ($scope, transitInfo) {
 	$scope.ll = [];
 	$scope.loc = { 'lat': 0, 'lng': 0 };
 	$scope.geoError = function (err) {
-		alert('Error!' + err);
+		alert('Error!' + err.message);
 	}
 	$scope.updateLocation = function (callback) {
 		//console.log('hi');
-		navigator.geolocation.getCurrentPosition(callback, $scope.geoError, { enableHighAccuracy: true });
+		navigator.geolocation.getCurrentPosition(callback, $scope.geoError, { enableHighAccuracy: true, timeout : 5000 });
 	}
 	$scope.getNearbyStops = function (lat, lng) {
 		//console.log(lat, lng);
