@@ -140,7 +140,7 @@ app.controller('RouteController', function ($scope, transitInfo) {
 	}
 	$scope.updateLocation = function (callback) {
 		//console.log('hi');
-		navigator.geolocation.getCurrentPosition(callback, $scope.geoError, { enableHighAccuracy: true, timeout : 5000 });
+		navigator.geolocation.getCurrentPosition(callback, $scope.geoError, { enableHighAccuracy: true, timeout : 5000, maximumAge: 0 });
 	}
 	$scope.getNearbyStops = function (lat, lng) {
 		//console.log(lat, lng);
